@@ -11,7 +11,7 @@ Personal skill library for AI coding agents. One format, works everywhere.
 ## Install
 
 ```bash
-git clone https://github.com/tejas-gk/tejas-skills  # update with your actual repo URL
+git clone https://github.com/tejasnafde/tejas-skills
 cd tejas-skills
 chmod +x install.sh
 ./install.sh
