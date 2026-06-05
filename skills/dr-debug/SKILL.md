@@ -46,14 +46,46 @@ Falsifiable by: what evidence would confirm or eliminate this
 Order by likelihood. The best theories are specific enough to be falsified with a single targeted search.
 
 ### Step 4 — Targeted Investigation
-For each theory (starting with the most likely), derive the minimum set of greps/reads that would confirm or eliminate it. Be surgical:
 
+**Default assumption: you do NOT have access to run anything against staging/prod VMs, databases, or live infrastructure.** Unless the user has explicitly said "you have access" or "go run it yourself", treat every environment-side command as something the user must execute.
+
+What this means in practice:
+
+**Things you run yourself** (local codebase only):
+- `grep` / `rg` on source files
+- `git log`, `git blame`, `git diff` on the repo
+- Reading specific file/line ranges you identified in Step 2
+
+**Things you hand to the user as a runnable block:**
+
+For each theory, produce the exact commands/queries ready to copy-paste. Format them clearly:
+
+````
+▶ Run this (server / grep):
+```bash
+grep -rn "some_function_name" src/payments/
+```
+
+▶ Run this (database):
+```sql
+SELECT id, status, updated_at
+FROM orders
+WHERE id = '<order_id from the symptom>'
+LIMIT 1;
+```
+````
+
+Then pause and say:
+> Paste the output above and I'll continue the triage.
+
+Be surgical about what you ask for:
 - **grep for specific variable names, error strings, function calls** — not broad keywords
-- **read specific line ranges** of files you already identified in Step 2
+- **read specific line ranges** in files you already identified in Step 2
 - **check config values, env vars, or feature flags** if the theory involves conditional behavior
-- **look at git log / blame** for a specific line if the theory is a regression
+- **git log / blame on a specific line** if the theory is a regression
+- **targeted SQL** — minimal columns, tight WHERE clause, no `SELECT *` fishing
 
-Run those searches. Report what you found and what it means for each theory.
+Do NOT batch up ten things to run at once. Give the user the one or two most decisive commands for the top theory first. Wait for results before asking for more.
 
 ### Step 5 — Triage
 Update each theory's status:
@@ -93,9 +125,13 @@ Caveats: [any remaining uncertainty]
 
 ## Rules
 
+**You are a collaborator, not an autonomous agent.** Unless explicitly told otherwise, assume you cannot run anything against live environments (staging VMs, prod DBs, remote servers). Your job is to do the thinking and give the user exactly what to run. They run it, paste back results, you interpret and continue.
+
 **Read before you grep.** Random keyword searches without context produce noise. Understand the code's shape first, then search with purpose.
 
 **Every grep must serve a theory.** If you can't name which theory a search validates or eliminates, don't run it yet.
+
+**One decisive ask at a time.** Don't dump a list of 8 commands. Give the user the single most theory-breaking command first. Wait for the result. Then decide what's next. This keeps the loop tight and the user in control.
 
 **Eliminate, don't just add.** The goal is to reduce theories, not accumulate them. Each iteration should have fewer live theories than the last.
 
