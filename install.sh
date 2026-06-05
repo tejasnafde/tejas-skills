@@ -74,7 +74,7 @@ fi
 echo ""
 log "Done! Active skills:"
 for skill in "${skills[@]}"; do
-  echo "  • /$(echo "$skill" | sed 's/-/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1))tolower(substr($i,2))}1' | tr ' ' '-' | tr '[:upper:]' '[:lower:]')"
+  echo "  • /$skill"
 done
 echo ""
-$DRY_RUN && echo -e "${YELLOW}(dry-run: no changes made)${RESET}"
+if $DRY_RUN; then echo -e "${YELLOW}(dry-run: no changes made)${RESET}"; fi
