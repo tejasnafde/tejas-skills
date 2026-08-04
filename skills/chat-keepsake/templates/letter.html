@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><!--
+  Printable letter. Local handwriting fonts ONLY: --print-to-pdf does not wait
+  for webfonts and will silently fall back. macOS options: Bradley Hand,
+  Noteworthy, Chalkboard, Snell Roundhand, Apple Chancery.
+  White background so printing is cheap. Render with:
+    python3 scripts/capture.py letter.html --pdf letter.pdf
+-->
+<style>
+@page{ size:A4; margin:20mm 22mm 20mm 22mm; }
+html,body{margin:0;padding:0;background:#fff}
+body{ font-family:"Bradley Hand","BradleyHandITCTT-Bold",cursive; color:#1b2434; font-size:15.0pt; line-height:1.70; }
+.date{text-align:right;margin:0 0 2.1em;font-size:.85em;color:#3d4a5e}
+.salut{margin:0 0 .6em;font-size:1.1em}
+p{margin:0 0 .8em;orphans:3;widows:3}
+em{font-style:normal;text-decoration:underline;text-decoration-thickness:.5pt;text-underline-offset:2.5pt}
+.sign{margin-top:1.4em;font-size:1.85em;color:#22304a}
+.ps{margin-top:.9em;font-size:1em;color:#1b2434}
+</style></head><body>
+<div class="date">CITY, DATE</div>
+<p class="salut">Name,</p>
+  <p>Body paragraph. Same text as the letter on the page, but adapt any line
+     that refers to "this page" or "on here" for print.</p>
+  <p>Keep it to five or six paragraphs. Two pages of handwriting is plenty.</p>
+<div class="sign">you</div>
+<div class="ps">a short handwritten PS :))</div>
+</body></html>
