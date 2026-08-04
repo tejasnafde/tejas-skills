@@ -7,6 +7,7 @@ Personal skill library for AI coding agents. One format, works everywhere.
 | Skill | Invoke | Description |
 |-------|--------|-------------|
 | [dr-debug](./skills/dr-debug/SKILL.md) | `/dr-debug` | Hypothesis-driven root cause analysis — read → theorize → targeted greps → triage → loop |
+| [chat-keepsake](./skills/chat-keepsake/SKILL.md) | `/chat-keepsake` | Turn a long chat export into a keepsake for someone — a page built from their real messages, plus a printable handwritten letter |
 
 ## Install
 
