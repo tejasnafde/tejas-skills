@@ -8,6 +8,7 @@ Personal skill library for AI coding agents. One format, works everywhere.
 |-------|--------|-------------|
 | [dr-debug](./skills/dr-debug/SKILL.md) | `/dr-debug` | Hypothesis-driven root cause analysis — read → theorize → targeted greps → triage → loop |
 | [chat-keepsake](./skills/chat-keepsake/SKILL.md) | `/chat-keepsake` | Turn a long chat export into a keepsake for someone — a page built from their real messages, plus a printable handwritten letter |
+| [improve-ui](./skills/improve-ui/SKILL.md) | `/improve-ui` | UI magic wand — discovers and orchestrates the best available design, implementation, and review skills |
 
 ## Install
 
