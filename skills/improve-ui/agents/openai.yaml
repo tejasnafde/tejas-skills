@@ -1,0 +1,6 @@
+interface:
+  display_name: "Improve UI"
+  short_description: "Orchestrate the best UI skills automatically"
+  default_prompt: "Use $improve-ui to inspect and materially improve the current interface."
+policy:
+  allow_implicit_invocation: false
