@@ -24,6 +24,12 @@ user. They approve the map, then you code to it.
 - **Dataflow arrows** between functions. Each arrow is labelled with the **data
   that passes** (the argument or return value), not a vague verb. `-->|user_id: str|`
   not `-->|calls|`.
+- **A step number on every arrow**, prefixed to the label, so the reader can follow
+  the call order: `-->|"1 · raw: bytes"|`. Number in execution order.
+- **Parallel calls from a common caller share one number**, with a letter suffix
+  per branch: `2a`, `2b`, `2c`. Same integer means they fire together (fan-out);
+  the next step after they finish gets the next integer. This is how the map shows
+  concurrency versus sequence.
 - **External edges** to things you do not own (DB, HTTP client, queue, third-party
   SDK) as stadium nodes, so the boundary of the change is visible.
 
@@ -44,21 +50,28 @@ flowchart TD
   subgraph svc["services/ingest.py · NEW"]
     parse["parse_file(raw: bytes) -> list[Row]"]
     store["save_rows(rows: list[Row], user_id: str) -> int"]
+    notify["queue_receipt(user_id: str) -> None"]
   end
 
   db[("Postgres")]
+  q[["events queue"]]
 
-  handler -->|"raw: bytes"| parse
-  parse -->|"rows: list[Row]"| store
-  handler -->|"user_id: str"| store
-  store -->|"INSERT rows"| db
-  store -->|"count: int"| handler
+  handler -->|"1 · raw: bytes"| parse
+  parse  -->|"2 · rows: list[Row]"| store
+  handler -->|"3a · rows + user_id"| store
+  handler -->|"3b · user_id: str"| notify
+  store  -->|"4 · INSERT rows"| db
+  notify -->|"4 · publish"| q
+  store  -->|"5 · count: int"| handler
 
   classDef new fill:#1f6f43,stroke:#0d3,color:#fff;
   classDef edit fill:#1f4f8f,stroke:#38f,color:#fff;
   class svc new
   class api edit
 ```
+
+In this example steps `3a` and `3b` fan out from `handler` at the same time, run
+in parallel, and both settle at step `4`. A plain sequence just counts `1, 2, 3`.
 
 ## Render it so the user can see it
 
