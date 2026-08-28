@@ -8,7 +8,7 @@ allowed-tools:
   - Read
   - Glob
   - Grep
-  - Task
+  - Agent
 ---
 
 # Repo Explore Skill
@@ -71,7 +71,7 @@ Common tag formats to try:
 
 ### 5. Explore with Explore Agent
 
-Use the Task tool with `subagent_type=Explore` to answer questions about the repository, rather than browsing files yourself. The Explore agent is optimized for:
+Use the Agent tool with `subagent_type=Explore` to answer questions about the repository, rather than browsing files yourself. The Explore agent is optimized for:
 - Finding files by patterns
 - Searching code for keywords
 - Understanding codebase architecture
@@ -79,7 +79,7 @@ Use the Task tool with `subagent_type=Explore` to answer questions about the rep
 
 Example:
 ```
-Task(
+Agent(
   subagent_type="Explore",
   prompt="""In ~/.cache/claude/repos/owner/repo/, find how authentication is implemented.
 
@@ -93,48 +93,11 @@ Requirements for your response:
 
 ### 6. Response Format Requirements
 
-When answering questions about the repository, include:
+The Agent prompt template above carries the full format. In short:
 
-#### Code Snippets
-- Include relevant code snippets that directly support the answer
-- Show actual type definitions, function signatures, and key logic
-- Use proper syntax highlighting with language identifier
-- Include file path and line numbers for each snippet:
-  ```go
-  // File: pkg/controller/foo.go:42-58
-  func (r *Reconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-      // ... relevant code
-  }
-  ```
-
-#### File Recommendations for Further Reading
-At the end of every response, include a **"Key Files for Further Exploration"** section:
-
-```markdown
-## Key Files for Further Exploration
-
-| File | Purpose | Start Here If... |
-|------|---------|------------------|
-| `pkg/apis/v1/types.go` | Core type definitions | You want to understand the data model |
-| `pkg/controller/main_controller.go` | Main reconciliation logic | You want to understand the control flow |
-| `docs/design.md` | Architecture decisions | You want high-level understanding |
-```
-
-**Guidelines for file recommendations:**
-- Prioritize files by relevance to the question asked
-- Include 3-7 files (not too few, not overwhelming)
-- Add context on why each file is useful
-- Include "Start Here If..." guidance to help with future exploration
-- Order from most fundamental to most specific
-
-#### Response Structure Template
-```
-1. Brief answer summary (2-3 sentences)
-2. Detailed explanation with inline code snippets
-3. Architecture/flow diagrams if helpful (ASCII or description)
-4. Key Files for Further Exploration table
-5. Optional: Related topics the user might want to explore next
-```
+- Include code snippets with file paths and line numbers (`pkg/controller/foo.go:42-58`)
+- End with a "Key Files for Further Exploration" table of 3-7 files, most fundamental first
+- Lead with a brief 2-3 sentence answer summary before the detail
 
 ### 7. Updates
 
