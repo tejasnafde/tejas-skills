@@ -93,16 +93,15 @@ Resolve trivial conflicts. For anything touching logic you didn't write, ask.
 ### CI
 
 - GitHub: `gh pr checks N`, then `gh run view <run-id> --log-failed | tail -80`.
-- Bitbucket: `bbpr N builds` gives the state and a link, but no logs. Reproduce the
-  failing step locally (read `bitbucket-pipelines.yml` for the command). If you
-  can't, hand the user the link.
+- Bitbucket: `bbpr N builds` gives each build's state and link (usually Google
+  Cloud Build). Don't dig for logs or reproduce locally. Hand the user the failing
+  build's link and stop on CI until they say what to do.
 
 Classify from the log:
 - **Branch-caused** (compile, test, lint or typecheck failing in touched code):
   fix, commit, push.
 - **Flaky or infra** (timeouts, runner or network errors, failures in untouched
-  code): GitHub gets one `gh run rerun <run-id> --failed` per SHA. Bitbucket: tell
-  the user. Never edit tests, CI config or pins to make an unrelated failure go
+  code): GitHub gets one `gh run rerun <run-id> --failed` per SHA. Never edit tests, CI config or pins to make an unrelated failure go
   away.
 - Same failure after a retry, or you can't tell: stop and ask.
 
