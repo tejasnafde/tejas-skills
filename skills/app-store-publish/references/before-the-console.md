@@ -91,6 +91,18 @@ uploads, push tokens, analytics, third-party webhooks.
 - **Package and version:** `aapt2 dump badging <apk> | head -1`.
 - **Signer:** `apksigner verify --print-certs <apk>`.
 
+**Self-updaters must not ship to Play.** An app that updates itself from
+GitHub or a bucket needs `REQUEST_INSTALL_PACKAGES`. Play blocks the release
+("This release includes permissions that haven't been declared in Play
+Console") and its policy forbids updating outside Play, so a declaration will
+not pass review. Build a Play variant instead: an `APP_VARIANT=play` env on the
+Play EAS profile, an `app.config.js` that removes the permission and adds it to
+`android.blockedPermissions`, and an `extra.distribution` flag that hides the
+update UI. Check `aapt2 dump permissions` on the sideloaded APK first for other
+sensitive permissions (`SYSTEM_ALERT_WINDOW`, `QUERY_ALL_PACKAGES`,
+`MANAGE_EXTERNAL_STORAGE`, background location) and drop unused ones from the
+Play build too. Verify with `APP_VARIANT=play npx expo config --type public`.
+
 ## 6. The reviewer account
 
 Play needs working login credentials when sign-in is required, and Target
