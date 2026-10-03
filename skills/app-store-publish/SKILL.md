@@ -10,7 +10,7 @@ Turn an app's verified facts and supplied assets into saved store setup, then ca
 ## Route by provider
 
 - **Before any console work:** read [prerequisites and off-console work](references/before-the-console.md): package name, developer verification API, signing key continuity, the policy pages and in-app features the forms assume, the reviewer account, and store graphics limits.
-- **Google Play:** read [Play Console workflow](references/google-play.md).
+- **Google Play:** read [Play Console workflow](references/google-play.md). For signing, build upload, or internal distribution, also read [signing and internal releases](references/play-signing-and-release.md).
 - **Computer use:** also read [UI execution and recovery](references/computer-use.md) when working through a browser.
 - **Intake and reporting:** use [handoff templates](references/handoff.md) to capture missing facts and leave a reliable resume state.
 - **Apple:** no validated Apple procedure is included yet. Obtain current official App Store Connect guidance and inspect the live account/UI before proceeding. Do not reuse Google answers or permissions for Apple. Add a separate provider reference once that workflow is learned; retain the common intake, evidence, scope, and reporting model.

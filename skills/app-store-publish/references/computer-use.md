@@ -9,6 +9,8 @@ Use the host's supported computer-use API. Read its documentation before acting 
 - Navigation may initially show the old page or a loading shell. Confirm title, URL, and target app before proceeding. When an unchanged tree leaves missing context, use an allowed screenshot/full snapshot rather than repeatedly polling unchanged state.
 - Prefer named AX controls. When a click fails with elementHasNoFrame, the first action may already have succeeded and replaced a later control. Inspect state before retrying to avoid toggling a selected answer off.
 - cannotClickOffscreenElement calls for scrolling and refreshing state. It does not justify blind coordinates. Observe a fresh screenshot before coordinate actions.
+- If the tool reports `frontmostApplicationChanged` or “The user changed” the app, rebind the app and observe current state before retrying. Inspect whether the write happened; do not assume failure.
+- A text-area click can leave focus on the page; Select All then selects page text instead of the field. Verify the actual field value after entry. A supported setValue operation worked for release notes in the observed workflow.
 - A native menu can trap keyboard navigation. Use its documented Cancel accessibility action if Escape does not dismiss it, then refresh state.
 
 ## Upload dialogs
