@@ -11,6 +11,7 @@ Personal skill library for AI coding agents. One format, works everywhere.
 | [chat-keepsake](./skills/chat-keepsake/SKILL.md) | `/chat-keepsake` | Turn a long chat export into a keepsake for someone — a page built from their real messages, plus a printable handwritten letter |
 | [improve-ui](./skills/improve-ui/SKILL.md) | `/improve-ui` | UI magic wand — discovers and orchestrates the best available design, implementation, and review skills |
 | [babysit-pr](./skills/babysit-pr/SKILL.md) | `/babysit-pr` | Watch a PR (GitHub or Bitbucket) until merged: fix branch CI failures and actionable reviews, resolve conflicts, wake only on change |
+| [app-store-publish](./skills/app-store-publish/SKILL.md) | `/app-store-publish` | Prepare and verify Google Play setup, listings, reviewer access, disclosures, and authorized publishing; structured for a future Apple workflow |
 
 ## Install
 
