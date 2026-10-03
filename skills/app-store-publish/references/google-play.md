@@ -98,6 +98,10 @@ For an app-only Admin request:
 
 App Admin includes permissions to manage access for users of that app, releases, signing, store presence, and financial information for the app; it is broader than store-listing editing. Do not downscope an explicit Admin request without discussion, or broaden a narrower request to Admin for convenience. Creating access does not authorize exercising release/signing permissions.
 
+## Signing and internal releases
+
+For key-export preparation, own-key enrollment, tester lists, AAB drafts, preview, and authorized rollout, read [signing and internal releases](play-signing-and-release.md). Preparation, signing-key changes, and publishing have separate authorization boundaries.
+
 ## Dashboard and handoff
 
 After saves, check App content → Need attention and the Dashboard. “You're all caught up” verifies no declarations currently need attention, not that the app is approved or released.
