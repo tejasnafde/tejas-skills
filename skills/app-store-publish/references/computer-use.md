@@ -31,3 +31,31 @@ On a crash or unexpected window change:
 5. After recovery, inspect persisted state and resume the pending step. Do not recreate the app, invite another user, re-accept agreements, or repeat release submissions.
 
 For an ambiguous write (no success indication before crash), read resulting state before any retry. A failed observation is not evidence a save failed. If the same native AX path crashes repeatedly, stop repeating it; use another permitted supported surface or hand off the affected step. Do not disable security protections, wipe profiles, install browsers, or change authentication to recover a form.
+
+## Running Codex computer use headless (no human relaying messages)
+
+Learned 2026-10-03, Codex CLI 0.160 with the ChatGPT desktop app installed.
+
+- `codex exec` gets the computer-use tool (`mcp__cua_repl.js`) only from a
+  Codex home that has the bundled `computer-use` plugin enabled. The desktop
+  app uses the default `~/.codex`; a separate `CODEX_HOME` without the plugin
+  has no such tool and the agent says so.
+- App access is granted PER SESSION, by the user, in the desktop UI. The grant
+  lives in `~/.codex/computer-use/sessions/<session-id>.toml`
+  (`[apps] allowed = ["org.chromium.Chromium"]`). A fresh `codex exec` session
+  has no grant and fails with "Computer Use was not approved to use <app>".
+  Do not write grant files for new sessions: that bypasses the user's consent.
+- Instead continue the session where the user granted access:
+  `codex exec resume <session-id> --skip-git-repo-check -c sandbox_mode='"workspace-write"' "<task>"`.
+  The desktop app holds that session open ("already has an active writer"),
+  so quit the app first (`osascript -e 'tell application "ChatGPT" to quit'`).
+  The chat history stays on disk.
+- `exec` defaults to a read-only sandbox, so the agent cannot write its report
+  file. Pass `sandbox_mode` workspace-write (it covers `/tmp`).
+- An automatic approval reviewer checks consequential clicks against the
+  latest instruction's scope. A narrow instruction ("change nothing else")
+  blocks Play's "Submit N changes for review", which bundles every pending
+  change. For a first release, state explicitly that the user's approval
+  covers the release together with the first-time setup (listing, countries,
+  declarations), or it stops.
+- The Mac must stay awake and unlocked while it works.
