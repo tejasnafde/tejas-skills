@@ -61,7 +61,9 @@ It is fully scriptable through the **Android Developer Console API**
 
 - When you create the first Play release, choose **use my own key** and upload
   the existing keystore (EAS: `eas credentials -p android`, download keystore)
-  through Google's PEPK tool. If Google generates a new key, users of the
+  as an encrypted export produced by Google's PEPK tool, rather than uploading
+  the raw keystore. See [signing and internal releases](play-signing-and-release.md)
+  for the validated Console procedure. If Google generates a new key, users of the
   sideloaded APK cannot update to the Play build without uninstalling.
 - Keep "automatic installer protection" on. It affects only Play-delivered
   builds, not your own sideloaded APKs.
