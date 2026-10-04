@@ -148,15 +148,6 @@ audience is blocked until Sign in details are saved.
   rollout. It cannot create the app, upload the signing key, or answer content
   rating, target audience, ads, app access or other declarations.
 
-## 9. Apple, when it comes
+## 9. Apple
 
-Not done yet. Known prerequisites from the Play run:
-
-- The Account Holder must accept pending agreements, add you as Admin with
-  "Certificates, Identifiers & Profiles", and request App Store Connect API
-  access. Only the Account Holder can do these.
-- Sign in with Apple is required when the app offers Google sign-in.
-- Guideline 4.2 (minimum functionality) is a real risk for WebView-shell apps.
-- Guideline 3.1.1: no external tip or donation link inside the app. Hide it in
-  native shells by a user-agent mark (Someday uses `SomedayNative/<version>`).
-- `review@tn07.dev` can be reused as the App Review demo account.
+See [Apple App Store](apple-app-store.md) for the full, validated procedure.
