@@ -13,7 +13,7 @@ Turn an app's verified facts and supplied assets into saved store setup, then ca
 - **Google Play:** read [Play Console workflow](references/google-play.md). For signing, build upload, or internal distribution, also read [signing and internal releases](references/play-signing-and-release.md).
 - **Computer use:** also read [UI execution and recovery](references/computer-use.md) when working through a browser.
 - **Intake and reporting:** use [handoff templates](references/handoff.md) to capture missing facts and leave a reliable resume state.
-- **Apple:** no validated Apple procedure is included yet. Obtain current official App Store Connect guidance and inspect the live account/UI before proceeding. Do not reuse Google answers or permissions for Apple. Add a separate provider reference once that workflow is learned; retain the common intake, evidence, scope, and reporting model.
+- **Apple App Store:** read [Apple App Store](references/apple-app-store.md): what needs the web UI (agreement, API key, App Group, app record, App Privacy, Sign in with Apple key) and what the App Store Connect API and EAS do (bundle IDs, certificates, builds, listing, age rating, price, screenshots, review details, submission). Do not reuse Google answers or permissions for Apple without checking.
 
 ## Start from a concrete app and endpoint
 
