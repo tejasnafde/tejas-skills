@@ -11,7 +11,7 @@ need the web UI.
 |---|---|
 | Accept the updated Program License Agreement | **Web UI, Account Holder only.** Blocks everything else (Certificates, App Store Connect, the API) until accepted. |
 | Create the App Store Connect API key | **Web UI**, Users and Access > Integrations > App Store Connect API. Admin role, so EAS can manage certificates. The `.p8` downloads ONCE: put it straight into a secret store with key_id, issuer_id, team_id, then `rm -P` the download. |
-| Register the bundle ID, enable capabilities | **API** (`POST /v1/bundleIds`, `POST /v1/bundleIdCapabilities`) |
+| Register the bundle ID, enable capabilities | **API** (`POST /v1/bundleIds`, `POST /v1/bundleIdCapabilities`). Sign in with Apple is `capabilityType: APPLE_ID_AUTH` with `settings: [{"key": "APPLE_ID_AUTH_APP_CONSENT", "options": [{"key": "PRIMARY_APP_CONSENT"}]}]`; `SIGN_IN_WITH_APPLE` is rejected with 409 `ENTITY_ERROR.ATTRIBUTE.TYPE`. |
 | App Groups (share extensions) | **Web UI.** The API can enable the `APP_GROUPS` capability but cannot create a group or assign it. Create `group.<bundle id>` and assign it to the app AND the extension ID. |
 | Create the app record | **Web UI.** The API cannot create apps. Name, language, bundle ID, SKU. |
 | App Privacy ("nutrition label") | **Web UI.** No API. Map from the Play data safety answers; publish it. |
@@ -70,6 +70,17 @@ EXPO_NO_CAPABILITY_SYNC=1 eas build -p ios --profile <store profile>
   `signInWithIdToken` with a hashed nonce) needs no Services ID and no client
   secret, so nothing expires every 6 months. Supabase: Apple provider enabled
   with client ID = the bundle ID, no secret.
+- **A second app on the same Supabase project** (scout shares Someday's, 2026-10-05):
+  set `external_apple_client_id` to a comma-separated list that KEEPS the existing
+  ID (`app.someday.capture,com.tejas.jobfinder`). Do not PATCH
+  `external_apple_additional_client_ids`: the Management API moved that value into
+  `external_apple_client_id` and dropped the existing ID, which broke the other
+  app's Apple sign-in until it was restored. Read the config back after every PATCH.
+- **Adding a native module to an app that ships OTA updates:** binaries already in
+  the field lack it, and an OTA bundle that imports it at the top of a file crashes
+  them on launch (same runtime version). Require it lazily, only on the platform
+  that has it (`Platform.OS === 'ios' ? require('expo-apple-authentication') : null`),
+  or bump the runtime version.
 - Account deletion must REVOKE Apple tokens: the Sign in with Apple key signs a
   client_secret JWT; the app re-authenticates with Apple at delete time to get
   a fresh authorizationCode; the API exchanges it and calls
