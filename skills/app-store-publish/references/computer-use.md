@@ -38,8 +38,12 @@ For an ambiguous write (no success indication before crash), read resulting stat
 
 ```sh
 codex exec -C ~/Desktop/projects --skip-git-repo-check \
-  -c sandbox_mode='"workspace-write"' "<task>"
+  -c sandbox_mode='"workspace-write"' "<task>" < /dev/null
 ```
+
+`< /dev/null` matters when the caller runs it in the background: with an open
+stdin, `codex exec` prints "Reading additional input from stdin..." and waits
+forever without starting the task.
 
 A fresh `codex exec` loads the `cua_repl` MCP server and binds
 `org.chromium.Chromium` with no prompt once the user has chosen "always allow"
