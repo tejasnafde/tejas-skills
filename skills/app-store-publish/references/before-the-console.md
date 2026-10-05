@@ -12,8 +12,29 @@ something false.
 - Pick it before the first APK ships anywhere, including sideloaded APKs. The
   name is also baked into Firebase (`google-services.json`), deep links and the
   developer-verification registration.
-- Convention for new apps: `dev.tn07.<app>`. Users never see it, except in the
-  Play URL.
+- Convention for new apps: **`app.tn07.<app>`**, the SAME ID on Android and iOS,
+  set in `app.json` before the first build of ANY kind (decided 2026-10-05, after
+  scout shipped sideloaded APKs as `com.tejas.jobfinder` and had to move). Users
+  never see it, except in the Play URL. Older apps predate this:
+  `app.someday.capture`, `app.switchboard.mobile`, `dev.tn07.brief`; leave
+  published ones alone.
+
+  Every other identifier derives from it, so nothing is invented per app:
+
+  | Identifier | Value |
+  |---|---|
+  | Android package, iOS bundle ID | `app.tn07.<app>` |
+  | iOS share extension | `app.tn07.<app>.share-extension` (what `expo-share-intent` derives) |
+  | App Group | `group.app.tn07.<app>` |
+  | App Store Connect SKU | `<app>-ios` |
+  | Expo slug, EAS project, URL scheme | `<app>` (not a legacy codename) |
+  | Firebase Android app | `app.tn07.<app>`, `google-services.json` trimmed to it |
+  | Store name | `<app>` plus a short tagline, max 30 characters |
+  | Secrets, GCP labels | `<APP>_*`, label `app=<app>` |
+
+- Changing it after a store record exists: Apple never lets an app record change
+  its bundle ID. Rename the abandoned record (`appInfoLocalizations` name, max 30
+  characters) so it stops holding the store name, and use a new SKU.
 - Play Console now asks for the package name on the Create app form and checks
   that the developer account owns it.
 
