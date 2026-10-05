@@ -54,6 +54,28 @@ fresh session; probe first with a read-only task ("bind Chromium, report the
 window title, click nothing"). `-C ~/Desktop/projects` lets the agent read the
 skill and write its report into the app repo instead of `/tmp`.
 
+**Computer use in another Codex home** (`CODEX_HOME`, for example a second
+account; validated 2026-10-05 on `~/.codex-lenskart`, an Enterprise login).
+Enabling the plugin in config is not enough, and `codex plugin marketplace add`
+refuses the name `openai-bundled` ("reserved"). What works:
+
+```sh
+H=~/.codex-lenskart
+mkdir -p $H/.tmp/bundled-marketplaces
+cp -R ~/.codex/.tmp/bundled-marketplaces/openai-bundled $H/.tmp/bundled-marketplaces/
+# must include the hidden .agents/plugins/marketplace.json; ChatGPT.app's
+# Resources/plugins copy lacks it, so copy from a home the desktop app materialized
+printf '\n[marketplaces.openai-bundled]\nsource_type = "local"\nsource = "%s/.tmp/bundled-marketplaces/openai-bundled"\n' "$H" >> $H/config.toml
+CODEX_HOME=$H codex plugin add computer-use@openai-bundled
+```
+
+Then copy the whole `[mcp_servers.node_repl]` and `[mcp_servers.node_repl.env]`
+blocks from `~/.codex/config.toml`, changing `CODEX_HOME` and the first entry of
+`NODE_REPL_TRUSTED_CODE_PATHS` to the new home. Without `node_repl` the skill
+loads but says its tool is absent. No grant file is needed: the "always allow"
+for Chromium lives in the Computer Use service, not in a Codex home. Probe with
+a read-only task before real work.
+
 The notes below are from the first run (2026-10-03) and explain resume, which is
 now the fallback, not the default.
 
