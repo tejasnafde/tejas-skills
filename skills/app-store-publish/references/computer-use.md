@@ -34,6 +34,25 @@ For an ambiguous write (no success indication before crash), read resulting stat
 
 ## Running Codex computer use headless (no human relaying messages)
 
+**Start a FRESH session scoped to the projects folder (validated 2026-10-05, scout):**
+
+```sh
+codex exec -C ~/Desktop/projects --skip-git-repo-check \
+  -c sandbox_mode='"workspace-write"' "<task>"
+```
+
+A fresh `codex exec` loads the `cua_repl` MCP server and binds
+`org.chromium.Chromium` with no prompt once the user has chosen "always allow"
+for Chromium in the desktop app. Resuming the older Someday session
+(`codex exec resume <id>`) loaded the stale `node_repl` server instead and failed
+with "cua is undefined", even with `SkyComputerUseService` running. Prefer a
+fresh session; probe first with a read-only task ("bind Chromium, report the
+window title, click nothing"). `-C ~/Desktop/projects` lets the agent read the
+skill and write its report into the app repo instead of `/tmp`.
+
+The notes below are from the first run (2026-10-03) and explain resume, which is
+now the fallback, not the default.
+
 Learned 2026-10-03, Codex CLI 0.160 with the ChatGPT desktop app installed.
 
 - `codex exec` gets the computer-use tool (`mcp__cua_repl.js`) only from a
