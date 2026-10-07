@@ -104,3 +104,17 @@ Learned 2026-10-03, Codex CLI 0.160 with the ChatGPT desktop app installed.
   covers the release together with the first-time setup (listing, countries,
   declarations), or it stops.
 - The Mac must stay awake and unlocked while it works.
+
+## Play Console traps (scout, 2026-10-07)
+
+- **Upload files from `/Users/Shared`, not `~/Desktop`.** Chromium's file picker kept
+  Open disabled for files under `~/Desktop` (folder privacy). Copy the AAB and
+  screenshots to `/Users/Shared/<app>-play/`, then Cmd+Shift+G, full path, Enter.
+- **"Save as draft" on the store listing does not complete the dashboard task.** The
+  release review then says "Add a full description to save" even though the text is
+  there. Open the listing, go to its Review step, and click **Save**.
+- **Memory:** this Mac has 8 GB. Never boot the iOS simulator alongside Codex computer
+  use, and keep Chromium to one tab; otherwise Console pages go blank or freeze.
+- **The first AAB upload triggers the pre-launch report.** Robot accounts named like
+  `firstname.lastname.12345@gmail.com` on one device model sign up within minutes.
+  They are not users.
