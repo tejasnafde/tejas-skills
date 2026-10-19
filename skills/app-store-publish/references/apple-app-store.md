@@ -112,6 +112,31 @@ EXPO_NO_CAPABILITY_SYNC=1 eas build -p ios --profile <store profile>
 - Most fixes to a WebView-shell app ship through the web with no review at
   all; only native shell changes need a new build and App Review.
 
+## When "Waiting for Review" does not move
+
+Normal first reviews start within 1 to 5 days. Someday and scout sat at
+WAITING_FOR_REVIEW for 14 days with no message (October 2026). The cause was
+silent: Apple had published an updated Program License Agreement after the
+submission, and it waited for the Account Holder. While an updated agreement
+waits, Apple starts no review for that team, App Store Connect shows nothing on
+the app page, and the review contact email gets no mail.
+
+- Check first, every few days while a review sits still: App Store Connect >
+  Business > Agreements (Account Holder login). Any agreement marked "New",
+  "Pending" or "Action needed" is the blocker. Only the Account Holder can
+  accept it. The API cannot see or accept agreements.
+- Status mail goes to the Account Holder and the App Store Connect users, not to
+  the `appStoreReviewDetails` contact. "No email" means nothing.
+- The optional product-page sections ("Header and Search Results", custom
+  product pages) do not block review. "No header asset added" is normal.
+- Two apps from one team stuck together points at the account, not the apps.
+- After the agreement is accepted, expect movement within 1 to 3 days. An
+  expedited review request is a reasonable extra push. If still nothing after
+  3 days, use Contact Us > App Review > status question. Never resubmit: a
+  new submission goes to the back of the queue.
+- A GitHub cron watcher (`appstore-live-watch.yml`: curl the store URL, post
+  to Discord, self-disable) removes the need to poll by hand.
+
 ## Computer-use checkpoints (Codex)
 
 Codex computer use asks for confirmation AT THE MOMENT of a legal or
