@@ -38,6 +38,8 @@ Save the list dialog and any Create confirmation, then inspect track selection. 
 
 ## Bundle and release draft
 
+**The first AAB can go up through the Publishing API.** Once the app record exists, `r0adkll/upload-google-play` (or any `androidpublisher` edit) with the per-app service account uploaded the very first bundle to the internal track as a draft (Switchboard, 2026-10-19; the service account had been invited with app-only release rights). The old rule "the first upload must be done by hand in the Console" no longer held. Play App Signing defaults to a Google-generated key on a new app; confirm it on the release page before the first rollout. A later bundle needs a higher versionCode, and a newer draft on the same track replaces the old one.
+
 Reuse an existing matching draft instead of creating duplicates. Upload the exact authorized AAB to the specified track. Wait for both transfer and distribution optimization to finish: 100% uploaded is not validation completion. The UI warns that leaving during transfer cancels the upload; after transfer it may permit leaving while optimization runs.
 
 Verify the artifact row's versionCode/versionName, and record SDK or validation details where relevant. Preserve the user’s release name. Enter localized notes inside the Console's language tags, for example `<en-US>…</en-US>`, and verify the actual field and language count. Then **Save as draft**; the observed confirmation was **Changes saved. You can now preview your release before publishing it.**

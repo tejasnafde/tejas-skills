@@ -37,6 +37,12 @@ something false.
   characters) so it stops holding the store name, and use a new SKU.
 - Play Console now asks for the package name on the Create app form and checks
   that the developer account owns it.
+- **An iOS bundle ID is unique across all of Apple, not per team.** Check it is
+  free before the first build: `GET /v1/bundleIds?filter[identifier]=<id>` on the
+  team returns nothing for an id another developer holds, so try to register it
+  (`POST /v1/bundleIds`) or run the first EAS build early. Switchboard found
+  `app.switchboard.mobile` taken only at its first EAS build (2026-10-17) and
+  moved iOS to `app.tn07.switchboard`; Android kept the old package.
 
 ## 2. Android developer verification (applies to sideloaded APKs too)
 
@@ -123,6 +129,17 @@ update UI. Check `aapt2 dump permissions` on the sideloaded APK first for other
 sensitive permissions (`SYSTEM_ALERT_WINDOW`, `QUERY_ALL_PACKAGES`,
 `MANAGE_EXTERNAL_STORAGE`, background location) and drop unused ones from the
 Play build too. Verify with `APP_VARIANT=play npx expo config --type public`.
+
+- **"Encrypted in transit" is decided by the RELEASE network config, not by
+  the app's design.** Read `network_security_config.xml` and any cleartext host
+  list in code for the release variant. A debug convenience such as the
+  emulator alias `10.0.2.2` left in release makes the honest answer "No",
+  because on a real phone it is an ordinary private address (Switchboard,
+  2026-10-18: moved it to debug only, then answered Yes).
+- **ML Kit's bundled models still phone home.** The bundled barcode scanner
+  needs no Play services download, but every ML Kit feature sends diagnostics
+  and a per-installation id to Google with no opt-out. Declare Diagnostics and
+  Device or other IDs in Data safety even when the app has no analytics of its own.
 
 ## 6. The reviewer account
 
