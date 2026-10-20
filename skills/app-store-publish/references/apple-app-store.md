@@ -55,6 +55,12 @@ EXPO_NO_CAPABILITY_SYNC=1 eas build -p ios --profile <store profile>
   cannot create (it would ask for an Apple login). Answer No to get the build
   going; create the APNs key in the web UI later and give it to EAS.
 - After the first interactive run, later builds work with `--non-interactive`.
+- `eas-cli` is usually not a project dependency, so `npx eas` fails with
+  "could not determine executable to run". Use
+  `npx --yes --package eas-cli@latest eas ...`.
+- `eas submit` needs the App Store Connect app record, and the API cannot make
+  one: without `ascAppId` it stops with "Set ascAppId in the submit profile".
+  Create the record in the web UI (Account Holder session) first.
 - `eas submit` reads the key from `submit.<profile>.ios.ascApiKeyPath`; write
   it from the secret store just before and `rm -P` it after (gitignore it).
 - Expo GraphQL can fail mid-setup on a network blip; rerun, it reuses what

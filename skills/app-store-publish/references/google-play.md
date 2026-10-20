@@ -14,7 +14,7 @@ Official entry points when interpretation is needed:
 
 Confirm the developer account and exact package/app record. Search the app list before creating a draft; similarly named apps and multiple packages may coexist in one account. Package availability/registration and draft creation are distinct checks; verify the actual identity displayed by Console.
 
-For creation, obtain name, default language, App/Game, and Free/Paid. Handle developer policy and export agreements under current confirmation rules. Do not treat draft creation as authorization to configure signing or create a release. Preserve automatic installer protection when requested or left at its default; describe its current build/distribution scope only using verified facts.
+For creation, obtain name, default language, App/Game, and Free/Paid. Handle developer policy and export agreements under current confirmation rules. A headless agent that meets the two Create app checkboxes ("Confirm app meets the Developer Program Policies", "Accept US export laws") or the IARC terms sends an asynchronous confirmation request that nobody answers, waits, and stops with nothing saved (Switchboard, 2026-10-19, two runs). Either the user ticks them in person, or the prompt carries the account Admin's written authorisation for those exact agreements and this one app, stated as the action-time confirmation the policy needs; with that, run 4 created the app and finished every section. Do not treat draft creation as authorization to configure signing or create a release. Preserve automatic installer protection when requested or left at its default; describe its current build/distribution scope only using verified facts.
 
 ## Dependency-aware setup
 
