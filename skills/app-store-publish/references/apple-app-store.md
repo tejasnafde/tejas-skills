@@ -149,7 +149,8 @@ The working sequence:
    goes from REJECTED to READY_FOR_REVIEW.
 3. `PATCH reviewSubmissions/{id}` with `{"submitted": true}`: WAITING_FOR_REVIEW.
 
-Reply in the Resolution Center (web only, Account Holder) with what changed.
+Reply in the Resolution Center (web only, Account Holder) with what changed,
+BEFORE step 3: once resubmitted, the old thread closes and has no reply box.
 
 ## When "Waiting for Review" does not move
 
