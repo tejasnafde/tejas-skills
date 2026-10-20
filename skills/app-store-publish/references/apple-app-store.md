@@ -118,6 +118,39 @@ EXPO_NO_CAPABILITY_SYNC=1 eas build -p ios --profile <store profile>
 - Most fixes to a WebView-shell app ship through the web with no review at
   all; only native shell changes need a new build and App Review.
 
+## iPhone-only apps are reviewed on an iPad
+
+`ios.supportsTablet: false` does NOT keep review off the iPad. Someday 1.20.0
+was rejected under guideline 4 (Design) on an iPad Air 11-inch: "parts of the
+app's user interface were crowded". An iPhone-only app on an iPad runs in an
+iPhone compatibility window that can be as small as 320 x 480 points.
+
+- Test every screen at 320x480 and 320x568, not only modern phone sizes, before
+  the first submission. Use Playwright WebKit (closest to WKWebView) for a
+  WebView shell; never boot the iOS simulator on the 8 GB Mac.
+- What broke at 320 wide: two fixed bottom bars took 186 of 480 points, the nav
+  title collapsed to one letter, chips ran past their cards, sheets did not
+  scroll, and the NATIVE sign-in screen had no ScrollView, so the keyboard hid
+  the email button. That last one needs a new build; the web fixes did not.
+- An OTA update cannot fix the rejected build when the app version moved on
+  (runtimeVersion policy appVersion). Build again, then rename the rejected
+  version (`PATCH appStoreVersions` `versionString`) and attach the new build.
+
+## Resubmitting after a rejection (API)
+
+The rejected review submission stays in UNRESOLVED_ISSUES. A plain
+`PATCH reviewSubmissions/{id} {submitted: true}` answers 409 "Version is not
+ready to be submitted yet, please try again later", forever, and adding a new
+item fails with "reviewSubmission state does not allow adding more items".
+The working sequence:
+
+1. Attach the new build to the version.
+2. `PATCH reviewSubmissionItems/{itemId}` with `{"resolved": true}`: the item
+   goes from REJECTED to READY_FOR_REVIEW.
+3. `PATCH reviewSubmissions/{id}` with `{"submitted": true}`: WAITING_FOR_REVIEW.
+
+Reply in the Resolution Center (web only, Account Holder) with what changed.
+
 ## When "Waiting for Review" does not move
 
 Normal first reviews start within 1 to 5 days. Someday and scout sat at
