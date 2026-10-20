@@ -34,6 +34,14 @@ For an ambiguous write (no success indication before crash), read resulting stat
 
 ## Running Codex computer use headless (no human relaying messages)
 
+Pre-flight, every run:
+- **Check the browser is signed in to every console the prompt touches** before launching. An App Store Connect login page stops the Apple part at once and the run is wasted (Switchboard, 2026-10-19).
+- **Pull the repo first.** The agent reads the declarations from repo docs; a stale checkout fed it an old Data safety answer.
+- **Claude Code cannot launch this job.** Its safety check classes a full-permission browser agent signed in as the Account Holder as unsafe, and it also blocks an `expect` driver answering Apple credential prompts. Write a launcher script and the prompt file, and have the user run the script from their own terminal.
+- **After a Mac restart the screen control may fail with `Computer Use server error -10005: noWindowsAvailable`** for every click, while the address bar still answers. Bring Chromium to the front, leave the Mac alone during the run, and check that Codex Computer Use still has Accessibility and Screen Recording in System Settings. A paused (SIGSTOP) run does not survive a restart.
+- **Resume prompts must list what is already saved** (app id, sections) and tell the agent to check All apps before creating anything, so a rerun never makes a duplicate. Move the previous `report.md` aside so the new one is detectable.
+
+
 **Start a FRESH session scoped to the projects folder (validated 2026-10-05, scout):**
 
 ```sh
