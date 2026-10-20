@@ -126,3 +126,22 @@ Learned 2026-10-03, Codex CLI 0.160 with the ChatGPT desktop app installed.
 - **The first AAB upload triggers the pre-launch report.** Robot accounts named like
   `firstname.lastname.12345@gmail.com` on one device model sign up within minutes.
   They are not users.
+
+## Apple: third-party AI disclosure (scout, 2026-10-20)
+
+App Review held scout 1.7.0 under Guideline 2.1 ("Does your app use any third-party
+AI? Which provider? What data is sent?"). It is guideline 5.1.2(i) underneath: an app
+that sends personal data to a third-party AI must name the provider and get explicit
+permission first. Build the consent screen BEFORE the first submission:
+
+- One-time screen before onboarding: names the provider (for example "Google Gemini on
+  Vertex AI"), lists each kind of data sent, says what is never sent, links the policy.
+- "Agree" stores a timestamp and a consent version server-side; "Not now" signs out
+  when the app cannot work without the AI.
+- The privacy policy must list the same data. A reply that claims consent the app
+  does not ask for is a rejection waiting to happen.
+- The ASC API cannot post Resolution Center replies. Codex computer use can, from a
+  text file under `/Users/Shared` pasted verbatim.
+
+`scripts/asc.py` is a one-call App Store Connect API helper that reads the key from
+Secret Manager, so `/tmp` cleanups no longer lose it.
