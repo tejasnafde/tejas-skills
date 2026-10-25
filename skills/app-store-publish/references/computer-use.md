@@ -145,3 +145,10 @@ permission first. Build the consent screen BEFORE the first submission:
 
 `scripts/asc.py` is a one-call App Store Connect API helper that reads the key from
 Secret Manager, so `/tmp` cleanups no longer lose it.
+
+**A reply alone does not restart review.** After answering a 2.1 Information Needed
+message, the version stays "Rejected" and the submission "Unresolved Issues"
+indefinitely (scout waited 5 days). Resubmit the same build. The API refuses
+(`PATCH reviewSubmissions submitted=true` returns 409 "Version is not ready to be
+submitted yet"), so use the UI: Edit, Update Review, Resubmit to App Review. Do it
+right after the reply.
