@@ -32,6 +32,15 @@ On a crash or unexpected window change:
 
 For an ambiguous write (no success indication before crash), read resulting state before any retry. A failed observation is not evidence a save failed. If the same native AX path crashes repeatedly, stop repeating it; use another permitted supported surface or hand off the affected step. Do not disable security protections, wipe profiles, install browsers, or change authentication to recover a form.
 
+## Which Chromium profile holds the console logins (Switchboard, 2026-10-25)
+
+- The profile signed in to App Store Connect (Account Holder) and the Play Console is NOT the default Chromium profile. It is a separate user-data folder, `~/.gcp-chromium-profile`. Chromium's profile menu does not show it.
+- Open it with:
+  `open -na /Applications/Chromium.app --args --user-data-dir=$HOME/.gcp-chromium-profile "<url>"`
+- When two Chromium windows are open, tell the Codex job to use only that window.
+- If the page shows the Apple sign-in page, the session expired. Stop. Only the Account Holder can sign in (2FA).
+- Before you say "no other profile exists", search old transcripts for `--user-data-dir`.
+
 ## Running Codex computer use headless (no human relaying messages)
 
 Pre-flight, every run:

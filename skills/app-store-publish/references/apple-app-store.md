@@ -107,6 +107,10 @@ EXPO_NO_CAPABILITY_SYNC=1 eas build -p ios --profile <store profile>
   `Page.captureScreenshot` with `Emulation.setDeviceMetricsOverride`
   (440 x 956, deviceScaleFactor 3) to get true 3x. Verify the PNG size before
   upload.
+- No simulator (Switchboard, 2026-10-25): React Native Web in Playwright works
+  for Expo apps. Use 440 x 956 and 428 x 926, device scale 3. Add a status bar
+  strip and safe-area padding. Drop screens that are half empty. Screens that
+  draw natively only may not render.
 
 ## Testing without an iPhone or a local simulator
 
@@ -136,6 +140,25 @@ iPhone compatibility window that can be as small as 320 x 480 points.
   (runtimeVersion policy appVersion). Build again, then rename the rejected
   version (`PATCH appStoreVersions` `versionString`) and attach the new build.
 
+## First submission checklist (API, Switchboard, 2026-10-25)
+
+A submit returns 409 with `associatedErrors`. That list names every missing
+field in one reply. Read all of it before you retry.
+
+1. **Version string.** The App Store version must equal the build's
+   `CFBundleShortVersionString`. While the version is in PREPARE_FOR_SUBMISSION,
+   rename it (`PATCH appStoreVersions/{id}` `versionString`, for example 1.0 to
+   0.4.1). Or rebuild with the number the store already has.
+2. **Content rights.** App-level, not per version. `PATCH apps/{id}` with
+   `contentRightsDeclaration: DOES_NOT_USE_THIRD_PARTY_CONTENT` when the app
+   uses no third-party content.
+3. **Review contact phone.** `appStoreReviewDetails` needs `contactPhone`.
+   Without it the submit returns 409.
+4. **App Privacy.** No API. Publish the answers in the browser.
+5. **Submit through the API.** `POST reviewSubmissions`, then `POST
+   reviewSubmissionItems` with the `appStoreVersion` relationship, then `PATCH
+   reviewSubmissions/{id}` with `submitted: true`.
+
 ## Resubmitting after a rejection (API)
 
 The rejected review submission stays in UNRESOLVED_ISSUES. A plain
@@ -151,6 +174,10 @@ The working sequence:
 
 Reply in the Resolution Center (web only, Account Holder) with what changed,
 BEFORE step 3: once resubmitted, the old thread closes and has no reply box.
+
+The API does not return the rejection text. It shows only REJECTED and
+UNRESOLVED_ISSUES. Read the reason in the browser Resolution Center, or in the
+Account Holder's email.
 
 ## When "Waiting for Review" does not move
 
