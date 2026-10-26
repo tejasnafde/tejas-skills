@@ -38,6 +38,7 @@ For an ambiguous write (no success indication before crash), read resulting stat
 - Open it with:
   `open -na /Applications/Chromium.app --args --user-data-dir=$HOME/.gcp-chromium-profile "<url>"`
 - When two Chromium windows are open, tell the Codex job to use only that window.
+- Before a Codex computer-use store job, quit every other Chromium instance. Open only the `~/.gcp-chromium-profile` instance. Two Chromium instances share one app id. The computer-use tool binds to the first window, which is often the default "Work" profile on a New tab.
 - If the page shows the Apple sign-in page, the session expired. Stop. Only the Account Holder can sign in (2FA).
 - Before you say "no other profile exists", search old transcripts for `--user-data-dir`.
 

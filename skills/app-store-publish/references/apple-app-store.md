@@ -179,6 +179,14 @@ The API does not return the rejection text. It shows only REJECTED and
 UNRESOLVED_ISSUES. Read the reason in the browser Resolution Center, or in the
 Account Holder's email.
 
+## "Crashed on launch" (guideline 2.1.0) on an Expo app
+
+Apple rejected an Expo app with 2.1.0 "crashed on launch". The cause was Expo
+SDK packages with mismatched patch versions.
+
+- Fix: run `npx expo install --fix`, then rebuild.
+- Test a TestFlight build on a device before you resubmit.
+
 ## When "Waiting for Review" does not move
 
 Normal first reviews start within 1 to 5 days. Someday and scout sat at
