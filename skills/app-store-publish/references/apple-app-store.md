@@ -70,6 +70,15 @@ EXPO_NO_CAPABILITY_SYNC=1 eas build -p ios --profile <store profile>
 
 - `ios.infoPlist.ITSAppUsesNonExemptEncryption: false` (no export compliance
   question per build).
+- **Privacy usage strings for every capability the WebView can reach**
+  (Someday 1.22.0, rejected 2.1(a) on 2026-10-31): a web `<input type="file"
+  accept="image/*">` inside a WKWebView offers "Take Photo", and iOS kills an app
+  that opens the camera with no `NSCameraUsageDescription`. Reviewers try the
+  camera. Set `NSCameraUsageDescription`, `NSPhotoLibraryUsageDescription`,
+  `NSMicrophoneUsageDescription` and `NSLocationWhenInUseUsageDescription` in
+  `ios.infoPlist` before the first build. Android needs none of them, so the Play
+  build never shows the crash. Check a built IPA with
+  `plutil -extract NSCameraUsageDescription raw Payload/*.app/Info.plist`.
 - `ios.supportsTablet: false` unless you want iPad screenshots and iPad review.
 - `ios.usesAppleSignIn: true` when the app offers Google sign-in (guideline
   4.8). Native ID-token flow (`expo-apple-authentication` + Supabase
