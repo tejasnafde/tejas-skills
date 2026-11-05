@@ -28,9 +28,11 @@ need the web UI.
 ## Talking to the API
 
 Sign an ES256 JWT with the `.p8` (`kid` = key_id, `iss` = issuer_id,
-`aud` = `appstoreconnect-v1`, expiry under 20 minutes). PyJWT plus cryptography
-in a throwaway venv is enough; keep a tiny `asc.py METHOD PATH [json]` helper
-that reads the key from the secret store at run time. Check access first:
+`aud` = `appstoreconnect-v1`, expiry under 20 minutes). Use the skill's own
+`scripts/asc.py METHOD PATH [json]`, which reads the key from Secret Manager at
+run time. Run it with uv, so there is no venv to lose (never copy it to `/tmp`,
+which macOS cleans):
+`uv run -q --with pyjwt --with cryptography python <skill>/scripts/asc.py GET /v1/apps`. Check access first:
 `GET /v1/apps` lists the team's apps (and shows whose account it is).
 
 ## EAS with only an API key (no Apple ID, no 2FA)
