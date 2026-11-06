@@ -162,3 +162,9 @@ indefinitely (scout waited 5 days). Resubmit the same build. The API refuses
 (`PATCH reviewSubmissions submitted=true` returns 409 "Version is not ready to be
 submitted yet"), so use the UI: Edit, Update Review, Resubmit to App Review. Do it
 right after the reply.
+
+**One computer-use run at a time on this Mac (2026-11-07).** Several Claude sessions
+(different profiles) can each start `codex exec` with computer use, and two runs on one
+screen fight over the same Chromium window. Before starting one, run
+`pgrep -fl "codex exec"`. If another session's run is active, wait for it; never kill a
+run you did not start.
