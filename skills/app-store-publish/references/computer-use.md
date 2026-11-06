@@ -94,6 +94,44 @@ loads but says its tool is absent. No grant file is needed: the "always allow"
 for Chromium lives in the Computer Use service, not in a Codex home. Probe with
 a read-only task before real work.
 
+**After a ChatGPT app update, a second home goes stale (2026-11-06, `~/.codex-jdhs`).**
+The plugins in a second home keep the version they were copied at, while the
+runtime in `ChatGPT.app` moves on. The old `unified-computer-use` launcher then
+fails every call with `CUA_REPL_ENABLED_SURFACES is required`. A `-c
+mcp_servers.node_repl.env...` override does not help: the failing server is
+`cua_repl` from the plugin. Fix:
+
+```sh
+H=~/.codex-jdhs; S=~/.codex/.tmp/bundled-marketplaces/openai-bundled
+cp $H/config.toml $H/config.toml.bak-$(date +%F)
+mv $H/.tmp/bundled-marketplaces/openai-bundled $H/.tmp/bundled-marketplaces/openai-bundled.bak
+cp -R $S $H/.tmp/bundled-marketplaces/
+for p in computer-use unified-computer-use browser; do CODEX_HOME=$H codex plugin add $p@openai-bundled; done
+```
+
+The new `plugins/cache/openai-bundled/unified-computer-use/<ver>/.mcp.json` is
+a TEMPLATE (`"command": "node"`, no env), because the desktop app fills it in
+only for its own home. Copy the filled-in file from
+`~/.codex/plugins/cache/openai-bundled/unified-computer-use/<ver>/.mcp.json`
+(`chmod u+w` the target first; it is read-only), and change only `CODEX_HOME`
+and the first entry of `NODE_REPL_TRUSTED_CODE_PATHS` to the second home. Keep
+`SKY_CUA_SERVICE_PATH` on `~/.codex/computer-use/Codex Computer Use.app`: the
+copy inside a second home is older.
+
+**Flags.** `codex exec` defaults to approval policy `never`, and computer use
+then refuses every call ("requires approval"). Run it with:
+
+```sh
+CODEX_HOME=$H codex exec -m gpt-6.1-sol --skip-git-repo-check \
+  -c sandbox_mode='"workspace-write"' -c approval_policy='"on-request"' \
+  -c approvals_reviewer='"auto_review"' \
+  -c 'sandbox_workspace_write.writable_roots=["/Users/Shared/<app>-play"]' - < prompt.md
+```
+
+`gpt-5.5` is refused on a ChatGPT login ("not supported when using Codex with a
+ChatGPT account", 2026-11-07). Read the current slugs from
+`$H/models_cache.json`.
+
 The notes below are from the first run (2026-10-03) and explain resume, which is
 now the fallback, not the default.
 
@@ -168,3 +206,9 @@ right after the reply.
 screen fight over the same Chromium window. Before starting one, run
 `pgrep -fl "codex exec"`. If another session's run is active, wait for it; never kill a
 run you did not start.
+Agents that drive Chromium without Codex (for example App Store Connect work) collide
+the same way: Chromium kept jumping back to their tab, element IDs went invalid, and the
+macremote run stopped with nothing saved. The auto reviewer also refuses to switch to or
+close a tab outside the authorised scope (an open Users and Permissions tab blocked the
+"one tab" rule). So before a run, the user closes unrelated tabs and leaves exactly one
+tab on the target console.
