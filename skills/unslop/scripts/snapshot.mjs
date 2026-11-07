@@ -28,7 +28,7 @@ async function browserKit() {
   process.exit(1);
 }
 
-const chrome = [process.env.CHROME_PATH, "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "/Applications/Chromium.app/Contents/MacOS/Chromium", "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser", "/usr/bin/google-chrome", "/usr/bin/chromium"].find((path) => path && existsSync(path));
+const chrome = [process.env.CHROME_PATH, "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "/Applications/Chromium.app/Contents/MacOS/Chromium", "/usr/bin/google-chrome", "/usr/bin/chromium"].find((path) => path && existsSync(path));
 const { chromium } = await browserKit();
 const browser = await chromium.launch(chrome ? { executablePath: chrome } : {});
 try {

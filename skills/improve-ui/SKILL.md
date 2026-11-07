@@ -96,7 +96,7 @@ The rendered check:
 node "<skill-dir>/scripts/inspect.mjs" <url> --out=<dir outside the project> [--viewport=1440x900 --viewport=390x844] [--selector=<css>]
 ```
 
-Run it from the project folder. It resolves `playwright` or `playwright-core` and `axe-core` from the project, and uses an installed Chrome, Chromium, or Brave (or `CHROME_PATH`). It checks contrast, button and link names, form labels, image alt text, sideways overflow, broken images, JavaScript errors, text under 12px, and repeated copy, and saves a full-page screenshot per viewport. Exit 0 means no confirmed errors, 1 means confirmed errors, 2 means incomplete coverage. Small text and repeated copy are signals to judge, not defects to drive to zero. If the dependencies are missing, do not install them without asking; state that the check did not run. Its runs do not count toward the render limit.
+Run it from the project folder. It resolves `playwright` or `playwright-core` and `axe-core` from the project, and uses an installed Chrome or Chromium (or `CHROME_PATH`). It checks contrast, button and link names, form labels, image alt text, sideways overflow, broken images, JavaScript errors, text under 12px, and repeated copy, and saves a full-page screenshot per viewport. Exit 0 means no confirmed errors, 1 means confirmed errors, 2 means incomplete coverage. Small text and repeated copy are signals to judge, not defects to drive to zero. If the dependencies are missing, do not install them without asking; state that the check did not run. Its runs do not count toward the render limit.
 
 ## 5. Decide how much to change
 
