@@ -48,7 +48,7 @@ try {
 } catch {}
 if (!axeSource) report.limits.push("axe-core is not installed, so accessibility rules did not run.");
 
-const chrome = [process.env.CHROME_PATH, "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "/Applications/Chromium.app/Contents/MacOS/Chromium", "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser", "/usr/bin/google-chrome", "/usr/bin/chromium"].find((p) => p && existsSync(p));
+const chrome = [process.env.CHROME_PATH, "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "/Applications/Chromium.app/Contents/MacOS/Chromium", "/usr/bin/google-chrome", "/usr/bin/chromium"].find((p) => p && existsSync(p));
 let browser;
 try {
   browser = await kit.chromium.launch({ headless: true, ...(chrome ? { executablePath: chrome } : {}) });
