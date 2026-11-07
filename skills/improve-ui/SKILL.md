@@ -25,6 +25,13 @@ When there is no code for the target:
 - **Only a screenshot.** Rebuild the screen as one static HTML file that matches it closely, and treat that file as the original.
 - In both cases the result is a redesigned page the user hands to whoever owns the real site. Say so in the report.
 
+Classify the mode, since it sets what may change:
+
+- **Create:** build the requested surface; inherit the surrounding system when one exists.
+- **Redesign:** replace visual decisions while keeping required content and behavior.
+- **Refine:** develop the existing intention and keep everything outside the request. Visual-only work keeps the wording fixed; copy-only work keeps the presentation fixed. Report problems outside the scope instead of fixing them.
+- **Review:** report prioritized findings and change nothing. No source edits, formatting, dependency installs, or files in the project; keep screenshots and reports outside it. Skip steps 6 and 7, and give each finding a location, the observed issue, its effect on the user, and a fix. Do not invent findings to fill a report.
+
 Explicit invocation authorizes ordinary edits needed for the scoped UI improvement. It does not authorize deployment, destructive cleanup, unrelated refactors, broad dependency churn, or changes outside the user's target.
 
 ## 2. Discover available skills
@@ -77,10 +84,19 @@ Before editing:
 1. Read repository instructions and inspect the dirty worktree. Preserve unrelated and overlapping user changes.
 2. Detect the framework, styling system, component library, design tokens, routes, tests, and run commands.
 3. Inspect the current rendered UI with browser or image tooling when available. Capture the relevant viewport and interaction states.
-4. Audit against [references/slop-signs.md](references/slop-signs.md). List every sign you find, one line each, with where it lives.
-5. Identify the few issues with the greatest effect on hierarchy, comprehension, usability, accessibility, and perceived quality.
+4. Run the rendered check when the page is served (see below) and save its report as the baseline.
+5. Audit against [references/slop-signs.md](references/slop-signs.md). List every sign you find, one line each, with where it lives.
+6. Identify the few issues with the greatest effect on hierarchy, comprehension, usability, accessibility, and perceived quality.
 
 Use the current interface as evidence. Do not redesign from a file list alone when a renderable surface exists.
+
+The rendered check:
+
+```bash
+node "<skill-dir>/scripts/inspect.mjs" <url> --out=<dir outside the project> [--viewport=1440x900 --viewport=390x844] [--selector=<css>]
+```
+
+Run it from the project folder. It resolves `playwright` or `playwright-core` and `axe-core` from the project, and uses an installed Chrome, Chromium, or Brave (or `CHROME_PATH`). It checks contrast, button and link names, form labels, image alt text, sideways overflow, broken images, JavaScript errors, text under 12px, and repeated copy, and saves a full-page screenshot per viewport. Exit 0 means no confirmed errors, 1 means confirmed errors, 2 means incomplete coverage. Small text and repeated copy are signals to judge, not defects to drive to zero. If the dependencies are missing, do not install them without asking; state that the check did not run. Its runs do not count toward the render limit.
 
 ## 5. Decide how much to change
 
@@ -141,10 +157,21 @@ Check at minimum:
 - Every sign from the baseline audit is gone, or deliberately kept with a reason
 - Template check: if you swapped in another product's name, would the screen still fit? If yes, push the direction harder in the copy, the visual, and the signature detail
 
+Run the rendered check again with a fresh `--out` directory and compare it with the baseline.
+
+Claim only what the evidence shows. Each kind of evidence supports different claims:
+
+- **Source:** intended structure and behavior, copy, and icon use.
+- **Rendered:** composition, type, crops, colors, overflow, and the states actually captured.
+- **Interaction:** controls, keyboard paths, and state changes actually exercised.
+- **Project checks:** the exact commands run and their results.
+
+A passing build does not prove visual quality, a screenshot does not prove keyboard access, and passing a few axe rules is not WCAG conformance. Never present more checks, fewer effects, or a different style as proof of better design.
+
 Use a selected review specialist for a final audit when one fits. Iterate on confirmed issues until the result is materially improved and verification is clean. Do not chase speculative polish after the important issues are resolved.
 
 If visual tooling is unavailable, use static inspection and technical checks, state that limitation, and do not claim pixel-level verification.
 
 ## 9. Report the result
 
-Lead with what improved. Include the level and direction, the wand stack used, files changed, verification performed, any unverified claims you asked about, and any remaining limitation or user decision. Keep the handoff concise and do not make the user reconstruct the workflow from progress updates.
+Lead with what improved. Include the mode, the level and direction, the wand stack used, files changed, the checks that actually ran with their results, the checks that did not run, any unverified claims you asked about, and any remaining limitation or user decision. Keep the handoff concise and do not make the user reconstruct the workflow from progress updates.
