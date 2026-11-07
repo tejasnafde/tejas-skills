@@ -47,6 +47,7 @@ Go through every group and note each sign you find with where it lives. Each lin
 - Hype words, like supercharge, seamless, unlock, magic, revolutionize → what the thing actually does
 - Trailing periods on labels and buttons → none
 - Fake looking data, like `$123,456` or `[X]` → plausible numbers
+- The same promise said again in different words across the headline, subhead, cards, notes and footer, like rephrased reassurance or `not X, but Y` contrasts → read the copy in order, keep the one place it belongs, and give the other places their own information. Adapted from flawless-ui-ux (MIT)
 
 ## Components
 

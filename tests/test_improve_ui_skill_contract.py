@@ -41,6 +41,14 @@ class ImproveUiSkillContractTests(unittest.TestCase):
         self.assertIn("dirty worktree", self.skill.lower())
         self.assertIn("visual tooling", self.skill.lower())
 
+    def test_skill_has_modes_and_a_rendered_check(self):
+        lower = self.skill.lower()
+        self.assertIn("**review:**", lower)
+        self.assertIn("change nothing", lower)
+        self.assertIn("scripts/inspect.mjs", self.skill)
+        self.assertTrue((REPO_ROOT / "skills" / "improve-ui" / "scripts" / "inspect.mjs").is_file())
+        self.assertIn("claim only what the evidence shows", lower)
+
     def test_readme_lists_the_skill(self):
         self.assertIn("[improve-ui](./skills/improve-ui/SKILL.md)", self.readme)
         self.assertIn("/improve-ui", self.readme)
