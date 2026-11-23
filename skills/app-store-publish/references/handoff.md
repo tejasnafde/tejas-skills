@@ -72,6 +72,11 @@ Requested endpoint:
 
 Update prior statuses when completed; don't leave “pending” claims contradicted by a later success. Keep historical crash notes clearly dated and identify what recovery resolved. A useful final response states outcome, real remaining work, and a report link.
 
-## Future Apple extension
+## Adding another provider
 
-Add a provider-specific reference and route it from SKILL.md. Reuse identity, endpoint, credential hygiene, evidence, and report structure. Learn Apple-specific review access, privacy disclosures, age-rating questions, assets/localizations, signing/build upload, testing, and release states from current official guidance and actual execution. Record observed dependencies and scope differences rather than porting Google checkbox answers. Do not mark Apple supported merely because this extension point exists.
+Apple is supported: see [Apple App Store](apple-app-store.md). For another store,
+add a provider reference and route it from SKILL.md. Reuse identity, endpoint,
+credential hygiene, evidence, and report structure. Learn the provider's review
+access, privacy disclosures, age rating, assets, signing, testing, and release
+states from its current official guidance and from real runs. Do not port answers
+from another store's forms.

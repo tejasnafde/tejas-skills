@@ -1,4 +1,4 @@
 interface:
   display_name: "App Store Publishing"
   short_description: "Prepare and publish apps with verified store setup"
-  default_prompt: "Use $app-store-publish to prepare this app for its chosen store and report what remains before submission."
+  default_prompt: "Use $app-store-publish to check this app against the pre-submission list, prepare it for Google Play or the App Store, and report what remains before submission."
