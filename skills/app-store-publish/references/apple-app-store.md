@@ -19,7 +19,7 @@ need the web UI.
 | Certificates and provisioning profiles | **EAS**, with the API key (see below) |
 | Build upload | `eas submit -p ios` with the API key |
 | Listing text, subtitle, categories, URLs, copyright | **API** (`appStoreVersionLocalizations`, `appInfoLocalizations`, `appInfos` categories) |
-| Age rating | **API** (`ageRatingDeclarations`). Answer every field; a private group app with UGC and messaging came out 4+. |
+| Age rating | **API** (`ageRatingDeclarations`). Answer every field. The questionnaire changed on 2026-01-31, and from 2026-11-16 it adds Shared Location and Dating and Relationships (due for every app by 2027-01-12). A private group app with UGC and messaging came out 4+ in October 2026, before these changes; answer again from current facts. See [pre-submission checks](pre-submission.md). |
 | Price and availability | **API** (`appPriceSchedules` USA $0 price point, `appAvailabilities` v2 with all territories) |
 | Screenshots | **API** (`appScreenshotSets` + `appScreenshots`: reserve, upload operations, commit with MD5) |
 | App Review details (demo account, contact, notes) | **API** (`appStoreReviewDetails`). `contactPhone` is REQUIRED at create time (409 `ENTITY_ERROR.ATTRIBUTE.REQUIRED`) and must be `+<country code> ...`. |
@@ -186,9 +186,34 @@ The working sequence:
 Reply in the Resolution Center (web only, Account Holder) with what changed,
 BEFORE step 3: once resubmitted, the old thread closes and has no reply box.
 
+**"Information Needed" with the same build (scout 1.7.0, 2026-10-20).** A reply
+alone does not restart review: the version stays Rejected and the submission
+Unresolved Issues (scout waited 5 days). Resubmit the same build right after the
+reply. On that run a plain `PATCH reviewSubmissions submitted=true` returned 409
+"Version is not ready to be submitted yet", and the agent used the UI instead:
+Edit, Update Review, Resubmit to App Review. That run did not try step 2 above
+(`resolved: true` on the item) first. Try steps 2 and 3; if the 409 stays, use
+the UI path, and record here which one worked.
+
 The API does not return the rejection text. It shows only REJECTED and
 UNRESOLVED_ISSUES. Read the reason in the browser Resolution Center, or in the
 Account Holder's email.
+
+## Third-party AI disclosure (scout, 2026-10-20)
+
+App Review held scout 1.7.0 under Guideline 2.1 ("Does your app use any third-party
+AI? Which provider? What data is sent?"). It is guideline 5.1.2(i) underneath: an app
+that sends personal data to a third-party AI must name the provider and get explicit
+permission first. Build the consent screen BEFORE the first submission:
+
+- One-time screen before onboarding: names the provider (for example "Google Gemini on
+  Vertex AI"), lists each kind of data sent, says what is never sent, links the policy.
+- "Agree" stores a timestamp and a consent version server-side; "Not now" signs out
+  when the app cannot work without the AI.
+- The privacy policy must list the same data. A reply that claims consent the app
+  does not ask for is a rejection waiting to happen.
+- The ASC API cannot post Resolution Center replies. Codex computer use can, from a
+  text file under `/Users/Shared` pasted verbatim.
 
 ## "Crashed on launch" (guideline 2.1.0) on an Expo app
 

@@ -113,6 +113,11 @@ uploads, push tokens, analytics, third-party webhooks.
 
 ## 5. Facts to verify from the built APK, not from memory
 
+`greenlight playscan --aab <aab>` (see [pre-submission checks](pre-submission.md))
+reads the merged manifest and flags restricted permissions, foreground service
+types and 16 KB alignment in one pass. The commands below give the exact values
+the forms ask for.
+
 - **Advertising ID:** `aapt2 dump permissions <apk> | grep AD_ID`. No
   `com.google.android.gms.permission.AD_ID` and no ad SDK means "No".
 - **Package and version:** `aapt2 dump badging <apk> | head -1`.

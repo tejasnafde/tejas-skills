@@ -1,6 +1,6 @@
 ---
 name: app-store-publish
-description: Prepare, complete, verify, and resume app-store publishing workflows, including Google Play Console listings, reviewer access, policy declarations, assets, scoped publisher access, and authorized submissions. Use for app store setup or publishing; not for app implementation or website deployment.
+description: Prepare, check, complete, verify, and resume publishing on Google Play and the Apple App Store, including pre-submission compliance checks, Play Console and App Store Connect listings, reviewer access, privacy and policy declarations, age ratings, assets, signing, scoped publisher access, authorized submissions, and recovery after a rejection. Use for app store setup, review submission, or rejection fixes; not for app implementation or website deployment.
 ---
 
 # App Store Publishing
@@ -10,6 +10,7 @@ Turn an app's verified facts and supplied assets into saved store setup, then ca
 ## Route by provider
 
 - **Before any console work:** read [prerequisites and off-console work](references/before-the-console.md): package name, developer verification API, signing key continuity, the policy pages and in-app features the forms assume, the reviewer account, and store graphics limits.
+- **Before every submission:** run the [pre-submission checks](references/pre-submission.md): a greenlight scan of the source and the built artifact, then the checklist for both stores, with dated requirements and official sources.
 - **Google Play:** read [Play Console workflow](references/google-play.md). For signing, build upload, or internal distribution, also read [signing and internal releases](references/play-signing-and-release.md).
 - **Computer use:** also read [UI execution and recovery](references/computer-use.md) when working through a browser.
 - **Intake and reporting:** use [handoff templates](references/handoff.md) to capture missing facts and leave a reliable resume state.
@@ -41,6 +42,6 @@ Reviewer credentials belong only in the intended store form. Do not place passwo
 
 For each section, use the final applicable Save, then verify a success message or persisted status. “Save as draft” may preserve incomplete work without completing the declaration. Reopen or inspect summaries only where that resolves a real uncertainty.
 
-Before finishing, inspect the app's setup dashboard and outstanding declarations. Separate actual blockers from optional testing/launch paths. Record completed sections, evidence, defaults, unanswered fields, required next actions, and authorization boundaries in a local report. Keep incomplete items explicit; do not declare completion because a tool call succeeded.
+Before a review submission, record the [pre-submission checks](references/pre-submission.md) in the report. Before finishing, inspect the app's setup dashboard and outstanding declarations. Separate actual blockers from optional testing/launch paths. Record completed sections, evidence, defaults, unanswered fields, required next actions, and authorization boundaries in a local report. Keep incomplete items explicit; do not declare completion because a tool call succeeded.
 
 Use current official provider documentation when policy interpretation, a changed requirement, or a technical claim needs verification. Live UI wording takes precedence over dated observations in the provider reference. Stop only dependent work when login, a new agreement, missing facts, or authorization blocks it; complete unaffected work and leave a precise resume step.

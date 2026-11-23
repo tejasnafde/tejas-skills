@@ -12,7 +12,7 @@ Personal skill library for AI coding agents. One format, works everywhere.
 | [improve-ui](./skills/improve-ui/SKILL.md) | `/improve-ui` | UI magic wand — discovers and orchestrates the best available design, implementation, and review skills |
 | [unslop](./skills/unslop/SKILL.md) | `/unslop` | Turn AI-looking, vibecoded UI into a designed screen: audit the slop, set a direction, fix in nine passes. Adapted from heydamir/unslop (CC BY 4.0) |
 | [babysit-pr](./skills/babysit-pr/SKILL.md) | `/babysit-pr` | Watch a PR (GitHub or Bitbucket) until merged: fix branch CI failures and actionable reviews, resolve conflicts, wake only on change |
-| [app-store-publish](./skills/app-store-publish/SKILL.md) | `/app-store-publish` | Prepare and verify Google Play setup, listings, reviewer access, disclosures, and authorized publishing; structured for a future Apple workflow |
+| [app-store-publish](./skills/app-store-publish/SKILL.md) | `/app-store-publish` | Pre-submission checks (greenlight scan plus a dated checklist), then Google Play and App Store setup, listings, reviewer access, disclosures, signing, authorized submission and rejection recovery |
 
 ## Install
 
