@@ -1,0 +1,69 @@
+{
+  "_note": "Anchor statements, one per score 1 to 5, several sets per question. The SSR paper's own anchor sets are not public, so every set here is ours and none is validated against human ratings until the calibration log shows it. Change a set only with a new version string, so old runs stay comparable.",
+  "version": "2026-11-23",
+  "questions": {
+    "download": {
+      "ask": "whether you would download it",
+      "validated": false,
+      "sets": [
+        ["I would definitely not download this app.",
+         "I probably would not download this app.",
+         "I might or might not download this app.",
+         "I would probably download this app.",
+         "I would definitely download this app."],
+        ["No interest at all, I would skip it.",
+         "Not really for me.",
+         "I am not sure about it.",
+         "It sounds useful, I would likely try it.",
+         "I love this, I would install it right away."],
+        ["There is no way I am putting this on my phone.",
+         "I doubt I would bother with it.",
+         "Maybe, it depends.",
+         "I would give it a try.",
+         "I want this now."]
+      ]
+    },
+    "appeal": {
+      "ask": "how appealing it is to you",
+      "validated": false,
+      "sets": [
+        ["This does not appeal to me at all.",
+         "This does not really appeal to me.",
+         "This is neither appealing nor unappealing to me.",
+         "This is quite appealing to me.",
+         "This is extremely appealing to me."],
+        ["I dislike this.",
+         "I am not keen on this.",
+         "It is okay, nothing special.",
+         "I like this.",
+         "I really love this."],
+        ["This turns me off.",
+         "This leaves me cold.",
+         "I feel neutral about this.",
+         "This catches my interest.",
+         "This excites me."]
+      ]
+    },
+    "clarity": {
+      "ask": "whether it is clear to you what this is and what it does",
+      "validated": false,
+      "sets": [
+        ["I have no idea what this is.",
+         "I am mostly confused about what this does.",
+         "I sort of get it, but I am not sure.",
+         "I mostly understand what this does.",
+         "It is completely clear what this is and what it does."],
+        ["This makes no sense to me.",
+         "This is hard to follow.",
+         "This is a bit vague.",
+         "This is fairly clear.",
+         "This is crystal clear."],
+        ["I would need someone to explain this to me.",
+         "I can only guess what this means.",
+         "I get the general idea.",
+         "I understand it well enough.",
+         "I understood it instantly."]
+      ]
+    }
+  }
+}
