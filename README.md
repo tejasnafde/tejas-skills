@@ -28,7 +28,8 @@ The install script symlinks each skill into every agent tool detected on your ma
 
 | Target | Covers |
 |--------|--------|
-| `~/.agents/skills/` | All Claude Code profiles (`~/.claude`, `~/.claude-tech-team`, `~/.claude-tejas`, `~/.claude-ai-team`) + Codex |
+| `~/.agents/skills/` | Codex, and the target of the Claude Code profile links |
+| `~/.claude/skills/`, `~/.claude-*/skills/` | Each Claude Code profile that already links a skill from this repo (link one skill by hand to opt a profile in) |
 | `~/.cursor/skills-cursor/` | Cursor |
 | `~/.opencode/skills/` | OpenCode (when installed) |
 
