@@ -1,0 +1,19 @@
+{
+  "audience": "urban India smartphone users, 18 to 45",
+  "calibrated": false,
+  "source": "Example only. Build a real mix from the app's analytics; see references/personas.md.",
+  "personas": [
+    {"id": "p01", "description": "28-year-old man, software engineer in Bengaluru, high income, iPhone, plans weekend trips with college friends"},
+    {"id": "p02", "description": "45-year-old woman, schoolteacher in Indore, middle income, budget Android phone, rarely installs new apps"},
+    {"id": "p03", "description": "19-year-old woman, college student in Pune, low income, Android, heavy Instagram user"},
+    {"id": "p04", "description": "34-year-old woman, marketing manager in Mumbai, high income, iPhone, busy with work and a toddler"},
+    {"id": "p05", "description": "38-year-old man, shop owner in Jaipur, middle income, Android, little free time"},
+    {"id": "p06", "description": "24-year-old man, delivery rider in Delhi, low income, cheap Android with little storage"},
+    {"id": "p07", "description": "26-year-old woman, UX designer in Hyderabad, high income, Android flagship, organises group outings"},
+    {"id": "p08", "description": "31-year-old man, bank officer in Lucknow, middle income, Android, married, sees friends once a month"},
+    {"id": "p09", "description": "22-year-old man, engineering student in Chennai, low income, Android, plays games, friends in many cities"},
+    {"id": "p10", "description": "40-year-old woman, doctor in Kochi, high income, iPhone, almost no free time"},
+    {"id": "p11", "description": "29-year-old woman, startup founder in Gurugram, high income, iPhone, tries many productivity apps"},
+    {"id": "p12", "description": "35-year-old man, government clerk in Patna, middle income, Android, uses WhatsApp for everything"}
+  ]
+}
