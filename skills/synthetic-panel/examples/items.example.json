@@ -1,0 +1,14 @@
+{
+  "context": "You see this app in the app store, with this headline:",
+  "items": [
+    {"id": "shared-list", "text": "Someday - a shared bucket list for your close friends. Save the places and plans you want to do together."},
+    {"id": "stop-planning", "text": "Someday - stop planning in group chats. Keep every plan your friends make in one list."},
+    {"id": "memories", "text": "Someday - plan it, do it, remember it. Plans and photos with your people."},
+    {"id": "weekend", "text": "Someday - never run out of weekend ideas with your friends."},
+    {"id": "private-circle", "text": "Someday - a private space for your circle's plans, picks and memories."}
+  ],
+  "controls": {
+    "good": {"text": "Someday - a shared bucket list for friends. Save plans together, then actually do them."},
+    "bad": {"text": "Someday App - The Ultimate Next-Gen AI-Powered Social Productivity Synergy Platform For Everything!!! Download Now"}
+  }
+}
