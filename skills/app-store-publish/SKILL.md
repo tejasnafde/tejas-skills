@@ -13,6 +13,7 @@ Turn an app's verified facts and supplied assets into saved store setup, then ca
 - **Before every submission:** run the [pre-submission checks](references/pre-submission.md): a greenlight scan of the source and the built artifact, then the checklist for both stores, with dated requirements and official sources.
 - **Google Play:** read [Play Console workflow](references/google-play.md). For signing, build upload, or internal distribution, also read [signing and internal releases](references/play-signing-and-release.md).
 - **Computer use:** also read [UI execution and recovery](references/computer-use.md) when working through a browser.
+- **Screenshots and listing A/B tests:** read [store screenshots and A/B tests](references/store-experiments.md): the screenshot checklist, App Store product page tests through the API, and Play store listing experiments (Play Console only).
 - **Intake and reporting:** use [handoff templates](references/handoff.md) to capture missing facts and leave a reliable resume state.
 - **Apple App Store:** read [Apple App Store](references/apple-app-store.md): what needs the web UI (agreement, API key, App Group, app record, App Privacy, Sign in with Apple key) and what the App Store Connect API and EAS do (bundle IDs, certificates, builds, listing, age rating, price, screenshots, review details, submission). Do not reuse Google answers or permissions for Apple without checking.
 
