@@ -32,6 +32,17 @@ On a crash or unexpected window change:
 
 For an ambiguous write (no success indication before crash), read resulting state before any retry. A failed observation is not evidence a save failed. If the same native AX path crashes repeatedly, stop repeating it; use another permitted supported surface or hand off the affected step. Do not disable security protections, wipe profiles, install browsers, or change authentication to recover a form.
 
+## Prefer Playwright over CDP for Play Console (2026-11-23)
+
+When the signed-in profile runs with `--remote-debugging-port=9222`, drive the
+console with Playwright (`chromium.connectOverCDP`) instead of screen control:
+open your own page, use `setInputFiles` for uploads, and disconnect at the end
+without closing the browser. A Codex run (`codex exec --dangerously-bypass-approvals-and-sandbox`)
+created and started a Play store listing experiment this way in one pass, with
+no accessibility reads, so the Chromium AX crash below cannot occur. Keep
+computer use for dialogs that CDP cannot reach (native file pickers are not one:
+`setInputFiles` skips them).
+
 ## Which Chromium profile holds the console logins (Switchboard, 2026-10-25)
 
 - The profile signed in to App Store Connect (Account Holder) and the Play Console is NOT the default Chromium profile. It is a separate user-data folder, `~/.gcp-chromium-profile`. Chromium's profile menu does not show it.
