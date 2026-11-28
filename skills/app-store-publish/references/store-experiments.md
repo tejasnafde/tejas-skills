@@ -24,6 +24,42 @@ Check every frame before upload:
 - Render with Playwright, not `chromium --headless --screenshot`. One browser at
   a time; stop the dev server when done.
 
+## Design choices that worked (from the Fable design pass)
+
+Make two sets with different concepts, so the test compares ideas, not small
+changes:
+
+- **Set A, clean:** the app's light background, a centred headline in the app's
+  display font, and one large phone under it.
+- **Set B, bold panorama:** the app's accent colour as one flat background, a
+  left-aligned headline in white, and objects that cross from one frame to the
+  next so the row reads as one strip in the store.
+
+The same rules hold for both sets:
+
+- **Order follows the user's path:** capture, add people, find, pick, plan,
+  remember. Frame 1 carries the whole promise, because many visitors see only
+  the first two frames.
+- **Headlines name the outcome, not the feature:** "Pick one for this weekend",
+  "Mark it done, keep the memory". Use sentence case, at most about 8 words and
+  two lines, with no exclamation marks. Set B can use a shorter, punchier
+  version of the same line ("Reels, places, films. One list.").
+- **The phone is large and partly cropped:** the screen is about 84% of the
+  frame width. Anchor it at the top (keep the status bar, crop the bottom) or at
+  the bottom (keep a sheet or the lower card, crop the top). Crop at a gap
+  between cards, never through text.
+- **Use real UI with believable demo data:** real screens from the app with
+  plausible names, places and counts. Do not draw fake UI.
+- **Typography comes from the app:** the app's display serif for headlines and
+  its UI sans for the status bar, with balanced line wrapping
+  (`text-wrap: balance`).
+- **Keep it flat:** no device glow, no gradient, no drop-shadow stack, no
+  floating badges. The UI and the headline carry the frame.
+- **Make it with code:** `capture.mjs` (Playwright at the app's real viewport,
+  2x or 3x scale, demo data) and `compose.mjs` (HTML frames rendered to PNG at
+  the store size). One copy table holds every headline, so a change is one
+  edit, and both sets and both stores render from the same captures.
+
 ## App Store: product page optimization (API only)
 
 All of it works through the App Store Connect API. No web UI step.
